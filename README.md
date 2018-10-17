@@ -1,24 +1,10 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+You may want to do the following to be able to run the app locally:
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+> Clone the repo
+> Create a .env file
+> Get an API token key from https://currentsapi.services
+> Run `bundle install`
+> Run `rails s`
+> You will be able to access the app on `localhost:3000`
