@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :update, :destroy]
+  before_action :set_author, only: [:show, :update, :destroy]
 
   # POST /fetch_articles from current News API
   def fetch
@@ -13,9 +14,18 @@ class ArticlesController < ApplicationController
     @first_ten = @latest_news["news"].first(10)
     
     # Create authors in the PG db
-    render json: @first_ten[0], status: :ok
+    @first_ten.each do |current_article|
+      # Create an author
+      @author_name = current_article["author"]
+      @author = Author.create(name: @author_name)
+      current_author = Author.find_by(name: @author_name)
 
-    # Store the ten articles in the PG db
+      # Create article
+      @author_id = current_author.id
+      @article = Article.create(title: current_article["title"], url: current_article["url"], published_at: current_article["published"], language: current_article["language"], author_id: @author_id) 
+    end
+
+    render json: @first_ten
   end
 
   # GET /articles
@@ -35,25 +45,21 @@ class ArticlesController < ApplicationController
     render status: :ok
   end
 
-  # POST /articles
-  def create
-    @article = Article.new(article_params)
-
-    if @article.save
-      render json: @article, status: :created, location: @article
-    else
-      render json: @article.errors, status: :unprocessable_entity
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.find(params[:id])
+    end
+    def set_author
+      @author = Author.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def article_params
       params.require(:article).permit(:title, :url, :published_at)
     end
+    def author_params
+      params.require(:author).permit(:name)
+    end
+
 end

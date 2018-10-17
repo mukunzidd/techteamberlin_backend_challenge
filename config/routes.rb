@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :authors
   # resources :articles
   # Fetch the 10 latest articles and store then in the db
   get '/fetch_articles' => 'articles#fetch'
