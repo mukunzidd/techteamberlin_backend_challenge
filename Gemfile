@@ -25,12 +25,24 @@ gem 'puma', '~> 3.11'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# REST Client for HTTP requests
+gem 'rest-client', '~> 2.0', '>= 2.0.2'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  
+  # Use RSpec for specs
+  gem 'rspec-rails', '>= 3.5.0'
+
+  # Use Factory Bot for generating random test data
+  gem 'factory_bot_rails'
+
+  # Secure Env Vars in .env files
+  gem 'dotenv-rails'
 end
 
 group :development do
