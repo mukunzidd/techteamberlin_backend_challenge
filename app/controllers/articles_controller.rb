@@ -2,9 +2,8 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :update, :destroy]
   before_action :set_author, only: [:show, :update, :destroy]
 
-  # POST /fetch_articles from current News API
+  # Fetch the articles from CN API
   def fetch
-    # Fetch the articles from CN API
     @fetch_req = RestClient.get 'https://api.currentsapi.services/v1/latest-news', {authorization: ENV['API_TOKEN']}
 
     # Parse the JSON res
@@ -28,7 +27,6 @@ class ArticlesController < ApplicationController
     render json: @first_ten
   end
 
-  # GET /articles
   def index
     @articles = Article.all
 

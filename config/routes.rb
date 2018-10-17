@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :authors
   # resources :articles
   # Fetch the 10 latest articles and store then in the db
   get '/fetch_articles' => 'articles#fetch'
@@ -13,5 +12,4 @@ Rails.application.routes.draw do
   # Search articles by a query string
   get '/search' => 'articles#search'
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
