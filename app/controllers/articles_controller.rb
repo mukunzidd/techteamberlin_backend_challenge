@@ -29,17 +29,22 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.all
-
     render json: @articles
   end
 
   # GET /by_author
-  def search
-    render status: :ok
+  def by_author
+    id = params[:id]
+    @articles = Article.find_by(id: id)
+    if @articles
+      render json: @articles
+    else
+      render json: {}
+    end
   end
 
-  # GET /by_author
-  def by_author
+  # GET /search
+  def search
     render status: :ok
   end
 
