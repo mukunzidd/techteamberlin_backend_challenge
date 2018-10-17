@@ -45,7 +45,13 @@ class ArticlesController < ApplicationController
 
   # GET /search
   def search
-    render status: :ok
+    query = params[:query]
+    @articles = Article.find_by(title: query)
+    if @articles
+      render json: @articles
+    else
+      render json: {}
+    end
   end
 
   private

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # Artcile by one particular Author [:id]
   get '/authors/:id/articles' => 'articles#by_author'
 
-  # Search articles by a query string
+  # Search articles by a "query" string
   get '/search' => 'articles#search'
 
 end
