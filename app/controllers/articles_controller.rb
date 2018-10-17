@@ -4,13 +4,17 @@ class ArticlesController < ApplicationController
   # POST /fetch_articles from current News API
   def fetch
     # Fetch the articles from CN API
-    @current_news = RestClient.get 'https://api.currentsapi.services/v1/latest-news', {authorization: ENV['API_TOKEN']}
+    @fetch_req = RestClient.get 'https://api.currentsapi.services/v1/latest-news', {authorization: ENV['API_TOKEN']}
 
-    @all_recent_articles = @current_news
+    # Parse the JSON res
+    @latest_news = JSON(@fetch_req.body)
 
-    render json: @all_recent_articles, status: :ok
     # Pick the first ten
+    @first_ten = @latest_news["news"].first(10)
+    
     # Create authors in the PG db
+    render json: @first_ten[0], status: :ok
+
     # Store the ten articles in the PG db
   end
 
@@ -41,7 +45,6 @@ class ArticlesController < ApplicationController
       render json: @article.errors, status: :unprocessable_entity
     end
   end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.
