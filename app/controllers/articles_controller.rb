@@ -1,7 +1,4 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :update, :destroy]
-  before_action :set_author, only: [:show, :update, :destroy]
-
   # Fetch the articles from CN API
   def fetch
     @fetch_req = RestClient.get 'https://api.currentsapi.services/v1/latest-news', {authorization: ENV['API_TOKEN']}
@@ -28,7 +25,7 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @articles = Article.all
+    @articles = Article.all.order('created_at DESC')
     render json: @articles
   end
 
@@ -55,14 +52,6 @@ class ArticlesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_article
-      @article = Article.find(params[:id])
-    end
-    def set_author
-      @author = Author.find(params[:id])
-    end
-
     # Only allow a trusted parameter "white list" through.
     def article_params
       params.require(:article).permit(:title, :url, :published_at)
