@@ -10,17 +10,25 @@ This JSON API is built with Ruby on Rails.
 
 `get '/fetch_articles' => 'articles#fetch'`
 
+> Example `localhost:3000/fetch_articles`
+
 #### Get All Articles
 
 `get '/articles' => 'articles#index'`
 
+> Example `localhost:3000/articles`
+
 #### Artcile by one particular Author [:id]
 
-> `get '/authors/:id/articles' => 'articles#by_author'`
+`get '/authors/:id/articles' => 'articles#by_author'`
+
+> Example `localhost:3000/authors/3/articles`
 
 #### Search articles by a "query" string
 
 `get '/search' => 'articles#search'`
+
+> Example `ocalhost:3000/search?query='Best new drama' coming out of Britain, Brazil`
 
 #### Installations
 
