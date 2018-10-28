@@ -2,6 +2,7 @@ class Article < ApplicationRecord
   belongs_to :author
 
   # Validations
-  validates :title, presence: { message: "article must have a title" }
+  validates :title, presence: true
+  validates :published_at, presence: true
   validates :title, uniqueness: true
 end

@@ -1,7 +1,7 @@
 class Author < ApplicationRecord
-  has_many :articles
+  has_many :articles, dependent: :destroy
 
   # Validations
-  validates :name, presence: { message: "author must have a name" }
+  validates :name, presence: true
   validates :name, uniqueness: true
 end
