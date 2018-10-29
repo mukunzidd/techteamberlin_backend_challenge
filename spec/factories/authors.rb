@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :item do
+  factory :author do
     name { Faker::Name.name_with_middle }
   end
 end
